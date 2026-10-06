@@ -1,7 +1,6 @@
-FROM alpine:latest AS alpine
-FROM docker.n8n.io/n8nio/n8n:latest
-COPY --from=alpine /sbin/apk /sbin/apk
-COPY --from=alpine /usr/lib/libapk.so* /usr/lib/
+FROM mwader/static-ffmpeg:latest AS ffmpeg
+FROM n8nio/n8n:latest
 USER root
-RUN apk add --no-cache ffmpeg curl
+COPY --from=ffmpeg /ffmpeg /usr/local/bin/ffmpeg
+COPY --from=ffmpeg /ffprobe /usr/local/bin/ffprobe
 USER node
