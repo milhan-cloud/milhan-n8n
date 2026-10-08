@@ -15,4 +15,6 @@ if [ -n "$SUPABASE_URL" ] && [ -n "$SUPABASE_KEY" ]; then
  n8n import:workflow --separate --input=/tmp/wf || echo "impor workflow gagal"
  fi
 fi
+if command -v tini >/dev/null 2>&1; then exec tini -- n8n; fi
 exec n8n
+
